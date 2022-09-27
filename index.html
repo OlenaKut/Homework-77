@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homework 77</title>
+    <style>
+      body {
+        margin: 0 auto;
+        text-align: center;
+      }
+      img {
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Create a cat</h2>
+    <div id="div">
+      <input type="text" id="text" placeholder="Enter your text" />
+      <input type="number" id="size" placeholder="Enter your size" />
+      <input type="text" id="color" placeholder="Enter your color" />
+      <input
+        type="submit"
+        id="submit"
+        value="Create a cat"
+        onclick="createCat()"
+      />
+    </div>
+    <img id="mem" />
+    <script>
+      function createCat() {
+        let userText = document.getElementById("text").value;
+        let userSize = document.getElementById("size").value;
+        let userColor = document.getElementById("color").value;
+        let img = document.getElementById("mem");
+        let apiUrl = `https://cataas.com/cat/595f280f557291a9750ebfb7/says/${userText}?&color=${userColor}&size=${userSize}&json=true`;
+        fetch(apiUrl, {
+          method: "GET",
+        })
+          .then((response) => response.json())
+          .then((response) => (img.src = `https://cataas.com/${response.url}`));
+      }
+    </script>
+  </body>
+</html>
